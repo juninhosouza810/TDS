@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle TDS</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            width: 90%;
+            max-width: 400px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h1 {
+            color: red;
+            font-size: 20px;
+        }
+        h2 {
+            color: gray;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            text-align: left;
+            margin: 5px 0;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .btn {
+            background-color: red;
+            color: white;
+            padding: 10px;
+            width: 100%;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .btn:hover {
+            background-color: darkred;
+        }
+        .participantes-container {
+            margin-top: 10px;
+            text-align: left;
+        }
+        .participante {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 10px;
+        }
+        .remove-btn {
+            background-color: gray;
+            color: white;
+            padding: 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100px;
+            align-self: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Controle TDS</h1>
+        <h2>Treinamento Durante o Serviço</h2>
+        <form id="formTDS">
+            <label for="instrutor">Instrutor:</label>
+            <input type="text" id="instrutor" required>
+
+            <label for="instrucao">Instrução:</label>
+            <input type="text" id="instrucao" required>
+
+            <label for="dataHora">Data/Hora:</label>
+            <input type="datetime-local" id="dataHora" required>
+
+            <div class="participantes-container">
+                <h3>Lista de Participantes</h3>
+                <div id="listaParticipantes"></div>
+                <button type="button" class="btn" onclick="adicionarParticipante()">Adicionar Participante</button>
+            </div>
+
+            <button type="button" class="btn" onclick="salvarEnviar()">Salvar/Enviar</button>
+        </form>
+    </div>
+
+    <script>
+        function adicionarParticipante() {
+            let lista = document.getElementById("listaParticipantes");
+
+            let div = document.createElement("div");
+            div.classList.add("participante");
+
+            div.innerHTML = `
+                <label>Graduação:</label>
+                <input type="text" class="graduacao">
+                
+                <label>Nome:</label>
+                <input type="text" class="nome">
+                
+                <label>RE:</label>
+                <input type="text" class="re">
+
+                <button type="button" class="remove-btn" onclick="removerParticipante(this)">Remover</button>
+            `;
+
+            lista.appendChild(div);
+        }
+
+        function removerParticipante(botao) {
+            botao.parentElement.remove();
+        }
+
+        function salvarEnviar() {
+            let instrutor = document.getElementById("instrutor").value;
+            let instrucao = document.getElementById("instrucao").value;
+            let dataHora = document.getElementById("dataHora").value;
+
+            if (!instrutor || !instrucao || !dataHora) {
+                alert("Preencha todos os campos obrigatórios!");
+                return;
+            }
+
+            let dados = `${instrutor}\n${instrucao}\n${dataHora}\n\n`;
+
+            let participantes = [];
+            document.querySelectorAll(".participante").forEach(participante => {
+                let graduacao = participante.querySelector(".graduacao").value;
+                let nome = participante.querySelector(".nome").value;
+                let re = participante.querySelector(".re").value;
+
+                if (graduacao || nome || re) {
+                    participantes.push(`${graduacao} ${nome} - RE: ${re}`);
+                }
+            });
+
+            if (participantes.length > 0) {
+                dados += `Participantes (${participantes.length} no total):\n${participantes.join("\n")}`;
+            }
+
+            // Enviar por e-mail
+            window.location.href = `mailto:juninhosouza810@gmail.com?subject=Registro TDS&body=${encodeURIComponent(dados)}`;
+
+            // Salvar no banco de dados local (LocalStorage)
+            let registros = JSON.parse(localStorage.getItem("tds_registros")) || [];
+            registros.push({ instrutor, instrucao, dataHora, participantes });
+            localStorage.setItem("tds_registros", JSON.stringify(registros));
+
+            alert("Dados salvos e enviados com sucesso!");
+            document.getElementById("formTDS").reset();
+            document.getElementById("listaParticipantes").innerHTML = ""; // Limpa os participantes
+        }
+    </script>
+</body>
+</html>
