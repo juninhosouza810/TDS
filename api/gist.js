@@ -15,6 +15,7 @@ export default async function handler(req, res) {
     const rawUrl = gist.files[FILE_NAME].raw_url + `?t=${Date.now()}`;
     const contentRes = await fetch(rawUrl, { cache: 'no-store' });
     const content = await contentRes.json();
+    console.log("content", content)
     return res.status(200).json(content);
   }
 
