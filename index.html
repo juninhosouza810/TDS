@@ -378,6 +378,7 @@ SD PM 181951-8 JÉSSICA FERNANDA DE JESUS MARQUES CECÍLIO`.split(",\n");
         const aviso = document.getElementById("aviso-herdados");
 
         const dados = await carregarDados();
+        console.log("dados", dados)
         const cursoAtual = encontrarCurso(dados, instrutor, treinamento);
 
         // Limpa tudo
