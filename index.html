@@ -293,40 +293,20 @@ SD PM 181951-8 JÉSSICA FERNANDA DE JESUS MARQUES CECÍLIO`.split(",\n");
       }
 
       async function carregarDados() {
-        // busca metadados
-        const metaRes = await fetch(`https://api.github.com/gists/${GIST_ID}`, {
-          cache: "no-store",
-        });
-        const gist = await metaRes.json();
-
-        // monta raw_url com bust
-        let rawUrl = gist.files[FILE_NAME].raw_url;
-        rawUrl += `?t=${Date.now()}`;
-
-        // lê JSON sem cache
-        const res = await fetch(rawUrl, { cache: "no-store" });
+        const res = await fetch("/api/gist");
         return await res.json();
       }
 
       async function salvarDados(dados) {
-        const res = await fetch(`https://api.github.com/gists/${GIST_ID}`, {
+        const res = await fetch("/api/gist", {
           method: "PATCH",
           headers: {
-            Authorization: TOKEN,
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({
-            files: {
-              [FILE_NAME]: {
-                content: JSON.stringify(dados, null, 2),
-              },
-            },
-          }),
+          body: JSON.stringify(dados),
         });
 
-        if (!res.ok) {
-          alert("Erro ao salvar os dados no Gist.");
-        }
+        if (!res.ok) alert("Erro ao salvar os dados.");
       }
 
       function encontrarCurso(dados, instrutor, curso) {
