@@ -1,452 +1,129 @@
-
 <!DOCTYPE html>
 <html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>TDS - Treinamento Durante o Serviço</title>
-    <style>
-      body {
-        margin: 0;
-        font-family: "Segoe UI", sans-serif;
-        background: linear-gradient(135deg, #1f1c2c, #928dab);
-        color: #fff;
-        display: flex;
-        justify-content: center;
-        align-items: flex-start;
-        min-height: 100vh;
-        padding: 40px 20px;
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TDS - Treinamento Durante o Serviço</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background: linear-gradient(135deg, #1f1c2c, #928dab);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    .container, .login-container {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 30px;
+      border-radius: 20px;
+      width: 100%;
+      max-width: 500px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    }
+
+    h1, h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin: 15px 0 5px;
+    }
+
+    select, input[type="datetime-local"], input[type="text"], input[type="password"], button {
+      width: 100%;
+      padding: 10px;
+      border-radius: 10px;
+      border: none;
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+
+    select, input[type="datetime-local"], input[type="text"], input[type="password"] {
+      background: #fff;
+      color: #333;
+    }
+
+    .list-group {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 10px;
+      border-radius: 10px;
+      margin-top: 10px;
+      display: none;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+
+    .list-group label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 5px 0;
+      padding: 5px 10px;
+      border-radius: 8px;
+    }
+
+    .list-group input[type="checkbox"] {
+      transform: scale(1.2);
+    }
+
+    button {
+      background: linear-gradient(90deg, #6a11cb, #2575fc);
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      opacity: 0.8;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <!-- Tela de Login -->
+  <div class="login-container" id="loginTela">
+    <h1>Login - TDS</h1>
+    <label for="usuario">Usuário:</label>
+    <input type="text" id="usuario" placeholder="Digite o usuário" />
+    <label for="senha">Senha:</label>
+    <input type="password" id="senha" placeholder="Digite a senha" />
+    <button onclick="verificarLogin()">Entrar</button>
+  </div>
+
+  <!-- Conteúdo Principal (escondido até login) -->
+  <div class="container hidden" id="conteudoPrincipal">
+    <h1>TDS</h1>
+    <h2>Treinamento Durante o Serviço</h2>
+
+    <!-- o restante do conteúdo continua igual -->
+    <!-- ... Cole todo o código a partir de: <label for="treinamento">Treinamento:</label> até o final ... -->
+  </div>
+
+  <script>
+    function verificarLogin() {
+      const usuario = document.getElementById("usuario").value;
+      const senha = document.getElementById("senha").value;
+
+      if (usuario === "tds2025" && senha === "5ciapm2025") {
+        document.getElementById("loginTela").classList.add("hidden");
+        document.getElementById("conteudoPrincipal").classList.remove("hidden");
+      } else {
+        alert("Usuário ou senha incorretos.");
       }
+    }
+  </script>
 
-      .container {
-        background: rgba(255, 255, 255, 0.1);
-        padding: 30px;
-        border-radius: 20px;
-        width: 100%;
-        max-width: 500px;
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
-      }
-
-      h1,
-      h2 {
-        text-align: center;
-        margin-bottom: 20px;
-      }
-
-      label {
-        display: block;
-        margin: 15px 0 5px;
-      }
-
-      select,
-      input[type="datetime-local"],
-      button {
-        width: 100%;
-        padding: 10px;
-        border-radius: 10px;
-        border: none;
-        font-size: 16px;
-        margin-bottom: 10px;
-      }
-
-      select,
-      input[type="datetime-local"] {
-        background: #fff;
-        color: #333;
-      }
-
-      .list-group {
-        background: rgba(255, 255, 255, 0.2);
-        padding: 10px;
-        border-radius: 10px;
-        margin-top: 10px;
-        display: none;
-        max-height: 300px;
-        overflow-y: auto;
-      }
-
-      .list-group label {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin: 5px 0;
-        padding: 5px 10px;
-        border-radius: 8px;
-      }
-
-      .list-group input[type="checkbox"] {
-        transform: scale(1.2);
-      }
-
-      button {
-        background: linear-gradient(90deg, #6a11cb, #2575fc);
-        color: white;
-        font-weight: bold;
-        cursor: pointer;
-        transition: 0.3s;
-      }
-
-      button:hover {
-        opacity: 0.8;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <h1>TDS</h1>
-      <h2>Treinamento Durante o Serviço</h2>
-
-      <label for="treinamento">Treinamento:</label>
-      <select id="treinamento">
-        <option value="Selecione o Tema da Instrução">
-          Selecione o Tema da Instrução
-        </option>
-        <option value="Fevereiro - Abordagem Pessoal">
-          Fevereiro - Abordagem Pessoal
-        </option>
-        <option value="Março - Uso Seletivo da Força">
-          Março - Uso Seletivo da Força
-        </option>
-        <option value="Abril - Arma de Incapacitação Neuromuscular">
-          Abril - Arma de Incapacitação Neuromuscular
-        </option>
-        <option value="Maio - Comunicação via Rede Rádio paa Apoio">
-          Maio - Comunicação via Rede Rádio paa Apoio
-        </option>
-        <option value="Junho - Ocorrência com individuo Homiziado">
-          Junho - Ocorrência com individuo Homiziado
-        </option>
-        <option value="Julho - Área de Segurança e de Perigo">
-          Julho - Área de Segurança e de Perigo
-        </option>
-        <option value="Agosto - Incursão em Ambiente Confinado">
-          Agosto - Incursão em Ambiente Confinado
-        </option>
-        <option value="Setembro - Instrumento utilizados como Arma Branca">
-          Setembro - Instrumento utilizados como Arma Branca
-        </option>
-        <option value="Outubro - Abordagem Pessoal">
-          Outubro - Abordagem Pessoal
-        </option>
-        <option value="Novembro - Uso Seletivo da Força">
-          Novembro - Uso Seletivo da Força
-        </option>
-        <option value="Dezembro - Arma de Incapacitação Neuromuscular">
-          Dezembro - Arma de Incapacitação Neuromuscular
-        </option>
-      </select>
-
-      <label for="instrutor">Instrutor:</label>
-      <select id="instrutor">
-        <option value="Selecione o Instrutor">Selecione o Instrutor</option>
-        <option value="Cap PM 121876-0 Josemar">Cap PM 121876-0 Josemar</option>
-        <option value="SubTen PM 117698-6 Marcos">
-          SubTen PM 117698-6 Marcos
-        </option>
-        <option value="SubTen PM 106459-2 Cleverson">
-          SubTen PM 106459-2 Cleverson
-        </option>
-        <option value="SubTen PM 103005-1 Carlos Henrique">
-          SubTen PM 103005-1 Carlos Henrique
-        </option>
-        <option value="SubTen PM 105535-6 Dantas">
-          SubTen PM 105535-6 Dantas
-        </option>
-        <option value="SubTen PM 117660-9 Rocha">
-          SubTen PM 117660-9 Rocha
-        </option>
-        <option value="SubTen PM 102962-2 Teixeira">
-          SubTen PM 102962-2 Teixeira
-        </option>
-        <option value="1º Sgt PM 125367-A J. Almeida">
-          1º Sgt PM 125367-A J. Almeida
-        </option>
-        <option value="1º Sgt PM 109201-4 Locatelli">
-          1º Sgt PM 109201-4 Locatelli
-        </option>
-        <option value="2º Sgt PM 119223-0 Jhonny">
-          2º Sgt PM 119223-0 Jhonny
-        </option>
-        <option value="2º Sgt PM 135976-2 Willians">
-          2º Sgt PM 135976-2 Willians
-        </option>
-        <option value="2º Sgt PM 115051-A Jurca">
-          2º Sgt PM 115051-A Jurca
-        </option>
-      </select>
-
-      <label for="dataHora">Data e Hora:</label>
-      <input type="datetime-local" id="dataHora" />
-
-      <label>Efetivo Instruído:</label>
-      <button onclick="toggleLista()">Selecionar Efetivo</button>
-      <p
-        id="aviso-herdados"
-        style="
-          display: none;
-          color: #fffa;
-          font-size: 14px;
-          margin-top: 10px;
-          text-align: center;
-        "
-      >
-        * Os nomes marcados e desabilitados foram instruídos por outro instrutor
-        neste mesmo curso. Eles são exibidos apenas para referência e não podem
-        ser selecionados novamente.
-      </p>
-
-      <div class="list-group" id="instruidos"></div>
-
-      <button onclick="enviarEmail()">Enviar Dados</button>
-    </div>
-
-    <script>
-      const GIST_ID = process.env.GIST_ID;
-      const FILE_NAME = "tds.json";
-      const TOKEN = process.env.GITST_TOKEN;
-
-      const nomes = `CAP PM 121876-0 JOSEMAR DE PAULA,
-SUBTEN PM 117698-6 MARCOS DONIZETE THOBIAS,
-SUBTEN PM 106459-2 CLEVERSON RODRIGO DE OLIVEIRA,
-SUBTEN PM 103005-1 CARLOS HENRIQUE LOCATELLI DOS SANTOS,
-SUBTEN PM 105535-6 MARCELO MATIAS DANTAS,
-SUBTEN PM 117660-9 MARCIO ADRIANO ROCHA,
-SUBTEN PM 102962-2 MARCELO TEIXEIRA,
-1º SGT PM 125367-A JONATHAN DE ALMEIDA,
-1º SGT PM 109201-4 AUGUSTO CÉSAR LOCATELLI DOS SANTOS,
-2º SGT PM 119223-0 JHONNY DE ALMEIDA,
-2º SGT PM 135976-2 WILLIANS AGUINALDO DIAS VITOR,
-2º SGT PM 115051-A PAULO CÉSAR JURCA,
-CB PM 990628-2 CELSO ROBERTO SAPATEIRO,
-CB PM 117627-7 CLAUDIO RODRIGO FRANSOSSO FERREIRA DOS SANTOS,
-CB PM 122077-2 CLODOALDO DE OLIVEIRA MEDEIROS,
-CB PM 124163-0 GUILHERME DE FREITAS ROCHA,
-CB PM 120996-5 SILVANA RODRIGUES ALVES,
-CB PM 119934-0 ALEX ROGÉRIO DE ATAÍDES,
-CB PM 970580-5 ROGÉRIO HENRIQUE MARIN,
-CB PM 972461-3 MARCOS LUIZ RODRIGUES DE MORAES,
-CB PM 980721-7 JOSÉ MARCOS RODRIGUES,
-CB PM 992180-0 MARCIO EDGLEI ANCELMO DE SÁ,
-CB PM 100692-4 LEÔNIDAS MANOEL FILHO,
-CB PM 133840-4 JOSÉ LUCIANO FILHO,
-CB PM 120987-6 SARA SHEILA ESTELITA ANDRÉ GOBBI,
-CB PM 138070-2 MARCOS AURELIO CONELHEIRO,
-CB PM 133035-7 VICTOR RODRIGO COELHO,
-CB PM 110250-8 PAULO SÉRGIO BALDO,
-CB PM 125413-8 RICARDO CRISTIANO MARQUES,
-CB PM 111407-7 MARCELO MENDES SILVA,
-CB PM 114106-6 JOSÉ ROBERTO ZANERATTO,
-CB PM 117645-5 RODOLFO DA SILVA CARVALHO,
-CB PM 114447-2 IVANIR FERREIRA DE SOUZA,
-CB PM 114518-5 ADEMIR DA SILVA,
-CB PM 117629-3 AFONSO ROBERTO ROCHA,
-CB PM 117696-0 JULIANO BARBOSA CORREIA,
-CB PM 120398-3 EVERTON PAULO RAMOS,
-CB PM 120761-0 CLEONICE BUENO SILVA,
-CB PM 142759-8 EMERSON CIRILO DE SOUSA OLIVEIRA,
-CB PM 125401-4 PEDRO TRINDADE NETO,
-CB PM 145337-8 LEANDRO JURCA,
-CB PM 139296-4 EMERSON PEREIRA DOS SANTOS,
-CB PM 151318-4 DIEGO FREDERICH GUEDES,
-CB PM 127433-3 RUBENS FRANCISCO DE SOUZA JÚNIOR,
-CB PM 154297-4 JAMILA CARVALHO DA SILVA,
-CB PM 127292-6 EDUARDO DIAS,
-CB PM 102486-8 MARCELO BORIM DESSOTTI,
-CB PM 131529-3 EVANDRO GONÇALVES PESSOA,
-CB PM 149128-8 WILLIAM ROBERTO DOS SANTOS,
-CB PM 137699-3 LUIS AUGUSTO BISSON,
-CB PM 181042-1 GABRIEL FERREIRA LIMA,
-CB PM 148304-8 TIAGO DE ASSIS DEMÉTRIO,
-CB PM 161026-A TERESA CRISTINA TRINDADE,
-CB PM 146046-3 DIEGO DE SOUZA CRUZ,
-SD PM 151139-4 BRUNO CESAR DA SILVA,
-SD PM 151499-7 RODRIGO CARVALHO DOS SANTOS,
-SD PM 153891-8 MATHEUS VITTA GROTTO DE ALCÂNTARA,
-SD PM 162822-4 MURILO CAROLI,
-SD PM 181951-8 JÉSSICA FERNANDA DE JESUS MARQUES CECÍLIO`.split(",\n");
-
-      const lista = document.getElementById("instruidos");
-
-      nomes.forEach((nome) => {
-        const label = document.createElement("label");
-        const span = document.createElement("span");
-        span.innerText = nome;
-        const checkbox = document.createElement("input");
-        checkbox.type = "checkbox";
-        checkbox.value = nome;
-
-        checkbox.addEventListener("change", (e) => {
-          if (
-            !e.target.checked &&
-            !confirm("Tem certeza que deseja desmarcar este nome?")
-          ) {
-            e.target.checked = true;
-          }
-        });
-
-        label.appendChild(span);
-        label.appendChild(checkbox);
-        lista.appendChild(label);
-      });
-
-      function toggleLista() {
-        lista.style.display = lista.style.display === "none" ? "block" : "none";
-      }
-
-      async function carregarDados() {
-        const res = await fetch("/api/gist");
-        return await res.json();
-      }
-
-      async function salvarDados(dados) {
-        const res = await fetch("/api/gist", {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(dados),
-        });
-
-        if (!res.ok) alert("Erro ao salvar os dados.");
-      }
-
-      function encontrarCurso(dados, instrutor, curso) {
-        return dados.find(
-          (d) => d.instrutor === instrutor && d.curso === curso
-        );
-      }
-
-      async function enviarEmail() {
-        const treinamento = document.getElementById("treinamento").value;
-        const instrutor = document.getElementById("instrutor").value;
-        const dataHora = document.getElementById("dataHora").value;
-
-        // Considerar apenas checkboxes marcados que NÃO são herdados
-        const selecionadosCheckbox = [
-          ...document.querySelectorAll("#instruidos input:checked"),
-        ].filter((cb) => !cb.hasAttribute("data-herdado"));
-
-        const selecionados = selecionadosCheckbox.map((cb) => cb.value);
-
-        // Atualiza visual
-        document.querySelectorAll("#instruidos label").forEach((label) => {
-          label.style.backgroundColor = "";
-          label.style.fontWeight = "normal";
-        });
-
-        selecionadosCheckbox.forEach((cb) => {
-          cb.parentElement.style.backgroundColor = "#00ff9966";
-          cb.parentElement.style.fontWeight = "bold";
-        });
-
-        // Atualiza dados no Gist
-        let dados = await carregarDados();
-        let curso = encontrarCurso(dados, instrutor, treinamento);
-
-        if (curso) {
-          curso.alunos = Array.from(
-            new Set([...curso.alunos, ...selecionados])
-          );
-          if (dataHora && dataHora !== curso.dataHora) {
-            curso.dataHora = dataHora;
-          }
-        } else {
-          dados.push({
-            instrutor,
-            curso: treinamento,
-            dataHora,
-            alunos: selecionados,
-          });
-        }
-
-        await salvarDados(dados);
-
-        // Corpo do e-mail com apenas os confirmados
-        const assunto = encodeURIComponent("Relatório de TDS");
-        const corpo = encodeURIComponent(
-          `Treinamento: ${treinamento}\nInstrutor: ${instrutor}\nData/Hora: ${dataHora}\n\nEfetivo Instruído:\n${selecionados.join(
-            "\n"
-          )}`
-        );
-
-        window.location.href = `mailto:2bpmi5cia@policiamilitar.sp.gov.br?subject=${assunto}&body=${corpo}`;
-      }
-
-      async function marcarEfetivoSalvo() {
-        const instrutor = document.getElementById("instrutor").value;
-        const treinamento = document.getElementById("treinamento").value;
-        const dataInput = document.getElementById("dataHora");
-        const aviso = document.getElementById("aviso-herdados");
-
-        const dados = await carregarDados();
-        console.log("dados", dados)
-        const cursoAtual = encontrarCurso(dados, instrutor, treinamento);
-
-        // Limpa tudo
-        document.querySelectorAll("#instruidos input").forEach((input) => {
-          input.checked = false;
-          input.disabled = false;
-          input.removeAttribute("data-herdado");
-          input.parentElement.style.backgroundColor = "";
-          input.parentElement.style.color = "";
-          input.parentElement.style.opacity = "1";
-          input.parentElement.style.fontWeight = "";
-        });
-
-        let herdados = new Set();
-
-        // ✅ Se houver curso já salvo com este instrutor
-        if (cursoAtual) {
-          cursoAtual.alunos.forEach((nome) => {
-            const input = document.querySelector(
-              `#instruidos input[value="${nome}"]`
-            );
-            if (input) {
-              input.checked = true;
-              input.disabled = false;
-              input.parentElement.style.backgroundColor = "#00ff9966";
-              input.parentElement.style.fontWeight = "bold";
-            }
-          });
-
-          if (cursoAtual.dataHora) {
-            dataInput.value = cursoAtual.dataHora;
-          }
-        } else {
-          // ✅ Somar todos os alunos do mesmo curso, de instrutores diferentes
-          dados.forEach((curso) => {
-            if (curso.curso === treinamento && curso.instrutor !== instrutor) {
-              curso.alunos.forEach((nome) => herdados.add(nome));
-            }
-          });
-
-          // ✅ Marcar os herdados
-          herdados.forEach((nome) => {
-            const input = document.querySelector(
-              `#instruidos input[value="${nome}"]`
-            );
-            if (input) {
-              input.checked = true;
-              input.disabled = true;
-              input.setAttribute("data-herdado", "true");
-              input.parentElement.style.backgroundColor = "#cccccc33";
-              input.parentElement.style.opacity = "0.5";
-            }
-          });
-
-          // ✅ Mostrar mensagem se existirem herdados
-          aviso.style.display = herdados.size > 0 ? "block" : "none";
-
-          dataInput.value = "";
-        }
-      }
-
-      document
-        .getElementById("instrutor")
-        .addEventListener("change", marcarEfetivoSalvo);
-      document
-        .getElementById("treinamento")
-        .addEventListener("change", marcarEfetivoSalvo);
-    </script>
-  </body>
+  <!-- O resto dos seus <script> e dados JS existentes entram aqui -->
+</body>
 </html>
